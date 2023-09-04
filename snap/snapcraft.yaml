@@ -1,0 +1,28 @@
+name: mautrix-whatsapp
+adopt-info: mautrix-whatsapp
+summary: A Matrix-WhatsApp puppeting bridge based on whatsmeow.
+description: |
+      To use with matrix-synapse-bridged
+grade: stable
+base: core22
+
+confinement: devmode
+
+apps:
+  mautrix-whatsapp:
+    command: bin/mautrix-whatsapp
+    
+parts:
+  mautrix-whatsapp:
+    plugin: go
+    source-type: git
+    source: https://github.com/mautrix/whatsapp.git
+    build-snaps:
+      - go
+    stage-packages:
+      - libolm-dev
+    build-packages:
+      - libolm-dev
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version "$(git describe --tags | sed 's/^v//' | cut -d "-" -f1)"  
