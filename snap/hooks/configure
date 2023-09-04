@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+if [ ! -f "$SNAP_DATA/config.yaml" ]; then
+  echo "Creating default configuration file..."
+  cp $SNAP/default/config.yaml "$SNAP_DATA/config.yaml"
+fi
+
+if [ ! -f "$SNAP_DATA/log.yaml" ]; then
+  echo "Creating default log configuration file..."
+  cp $SNAP/default/log.yaml "$SNAP_DATA/log.yaml"
+fi

@@ -1,4 +1,4 @@
-name: mautrix-whatsapp
+name: matrix-whatsapp-bridged
 adopt-info: mautrix-whatsapp
 summary: A Matrix-WhatsApp puppeting bridge based on whatsmeow.
 description: |
@@ -6,7 +6,13 @@ description: |
 grade: stable
 base: core22
 
-confinement: devmode
+confinement: strict
+
+# Make /var/lib/synapse inside the snap point to $SNAP_DATA directory as you
+# can't use the $SNAP_DATA variable in config yaml files
+layout:
+    /var/log/mautrix-whatsapp:
+      bind: $SNAP_DATA
 
 apps:
   mautrix-whatsapp:
